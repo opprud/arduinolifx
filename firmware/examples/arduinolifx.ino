@@ -48,7 +48,7 @@ void setLight();
 
 
 // set to 1 to output debug messages (including packet dumps) to serial (38400 baud)
-const boolean DEBUG = 0;
+const boolean DEBUG = 1;
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
@@ -90,7 +90,8 @@ RGBMoodLifx LIFXBulb(redPin, greenPin, bluePin);
 
 void setup() {
 
-  Serial.begin(38400);
+  Serial.begin(9600);
+  while(!Serial.available()) Spark.process();
   Serial.println(F("LIFX bulb emulator for Arduino starting up..."));
 
 
@@ -119,9 +120,7 @@ void setup() {
   LIFXBulb.setFadingSpeed(20);
 
   // read in settings from EEPROM (if they exist) for bulb label and tags
-  if(EEPROM.read(EEPROM_CONFIG_START) == EEPROM_CONFIG[0]
-    && EEPROM.read(EEPROM_CONFIG_START+1) == EEPROM_CONFIG[1]
-    && EEPROM.read(EEPROM_CONFIG_START+2) == EEPROM_CONFIG[2]) {
+  if(EEPROM.read(EEPROM_CONFIG_START) == EEPROM_CONFIG[0] && EEPROM.read(EEPROM_CONFIG_START+1) == EEPROM_CONFIG[1] && EEPROM.read(EEPROM_CONFIG_START+2) == EEPROM_CONFIG[2]) {
       if(DEBUG) {
         Serial.println(F("Config exists in EEPROM, reading..."));
         Serial.print(F("Bulb label: "));
@@ -209,7 +208,6 @@ void setup() {
 
 void loop() {
   LIFXBulb.tick();
-
   // buffers for receiving and sending data
   byte PacketBuffer[128]; //buffer to hold incoming packet,
 
@@ -244,6 +242,33 @@ void loop() {
     handleRequest(request);
   }
 
+    // if there's UDP data available, read a packet
+  int packetSize = Udp.parsePacket();
+  if(packetSize) {
+    Udp.read(PacketBuffer, 128);
+
+    if(DEBUG) {
+      Serial.print(F("-UDP "));
+      for(int i = 0; i < LifxPacketSize; i++) {
+        Serial.print(PacketBuffer[i], HEX);
+        Serial.print(SPACE);
+      }
+
+      for(int i = LifxPacketSize; i < packetSize; i++) {
+        Serial.print(PacketBuffer[i], HEX);
+        Serial.print(SPACE);
+      }
+      Serial.println();
+    }
+
+    // push the data into the LifxPacket structure
+    LifxPacket request;
+    processRequest(PacketBuffer, sizeof(PacketBuffer), request);
+
+    //respond to the request
+    handleRequest(request);
+
+  }
   //Not available in Spark
   //Ethernet.maintain();
 
