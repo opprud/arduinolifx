@@ -24,3 +24,5 @@ Emulates a LIFX bulb. Connect an RGB LED (or LED strip via drivers) to redPin, g
 Made possible by the work of magicmonkey: https://github.com/magicmonkey/lifxjs/ - you can use this to control your arduino bulb as well as real LIFX bulbs at the same time!
 
 And also the RGBMood library by Harold Waterkeyn, which was modified slightly to support powering down the LED
+
+Ported over to Spark by @kennethlimcp, @pkourany and @m-mcgowan on 07 September 2014

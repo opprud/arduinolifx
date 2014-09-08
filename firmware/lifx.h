@@ -10,7 +10,7 @@ struct LifxPacket {
   uint64_t timestamp;
   uint16_t packet_type; //little endian
   uint16_t reserved4;
-  
+
   byte data[128];
   int data_size;
 };
@@ -63,3 +63,14 @@ const byte LIGHT_STATUS = 0x6b;
 
 // helpers
 #define SPACE " "
+
+// Added in for Spark
+#ifndef lowByte
+#define lowByte(w) ((uint8_t)((w) & 0xFF))
+#endif
+#ifndef highByte
+#define highByte(w) ((uint8_t)((w) >> 8) && 0xFF)
+#endif
+#ifndef word
+#define word(b1,b2)  uint16_t(uint8_t(b1)<<8|uint8_t(b2))
+#endif

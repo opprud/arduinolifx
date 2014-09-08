@@ -1,0 +1,8 @@
+{
+    "name": "RGBMoodLifx",
+    "version": "0.0.1",
+    "author": "Paul Kourany, Kenneth Lim, Matthew McGowan",
+    "license": "",
+    "description": "LIFX bulb emulator"
+
+}

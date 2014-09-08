@@ -1,9 +1,9 @@
 /*
   Created by Harold Waterkeyn, February 1, 2012
   V0.3 : Feb 4, 2012
-  
+
   Modified (slightly) for LIFX bulb - just so we can send RGB 0,0,0 to turn the bulb off!
-  
+
   Credits:
   Inspired from the Moodlight Library by Kasper Kamperman
     http://www.kasperkamperman.com/blog/arduino-moodlight-library/
@@ -11,7 +11,12 @@
 
 #ifndef GUARD_RGB
 #define GUARD_RGB
-#include "Arduino.h"
+
+#include "spark_wiring_random.h"
+#include "application.h"
+//#include "Arduino.h"
+
+
 class RGBMoodLifx {
   public:
     enum Modes {
@@ -25,7 +30,7 @@ class RGBMoodLifx {
     };
 
     RGBMoodLifx(uint8_t = 0, uint8_t = 0, uint8_t = 0); // New instance with output pin specified.
-    void setHSB(uint16_t, uint16_t, uint16_t);     // Set a fixed color from HSB color space.
+    void setHSB(uint16_t , uint16_t , uint16_t);     // Set a fixed color from HSB color space.
     void setRGB(uint16_t, uint16_t, uint16_t);     // Set a fixed color from RGB color space.
     void setRGB(uint32_t); // Using Color class.
     void fadeHSB(uint16_t, uint16_t, uint16_t, bool = true);    // Fade to a new color (given in HSB color space).

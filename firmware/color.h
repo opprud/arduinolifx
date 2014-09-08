@@ -1,4 +1,6 @@
 /* Source: http://stackoverflow.com/questions/3018313/algorithm-to-convert-rgb-to-hsv-and-hsv-to-rgb-in-range-0-255-for-both */
+#include "math.h"
+
 
 struct rgb {
     double r;       // percent
@@ -108,7 +110,7 @@ rgb hsv2rgb(hsv in)
         out.b = q;
         break;
     }
-    return out;     
+    return out;
 }
 
 
@@ -121,7 +123,7 @@ rgb kelvinToRGB(long kelvin) {
 
   if(temperature <= 66) {
     kelvin_rgb.r = 255;
-  } 
+  }
   else {
     kelvin_rgb.r = temperature - 60;
     kelvin_rgb.r = 329.698727446 * pow(kelvin_rgb.r, -0.1332047592);
@@ -134,7 +136,7 @@ rgb kelvinToRGB(long kelvin) {
     kelvin_rgb.g = 99.4708025861 * log(kelvin_rgb.g) - 161.1195681661;
     if(kelvin_rgb.g < 0) kelvin_rgb.g = 0;
     if(kelvin_rgb.g > 255) kelvin_rgb.g = 255;
-  } 
+  }
   else {
     kelvin_rgb.g = temperature - 60;
     kelvin_rgb.g = 288.1221695283 * pow(kelvin_rgb.g, -0.0755148492);
@@ -144,11 +146,11 @@ rgb kelvinToRGB(long kelvin) {
 
   if(temperature >= 66) {
     kelvin_rgb.b = 255;
-  } 
+  }
   else {
     if(temperature <= 19) {
       kelvin_rgb.b = 0;
-    } 
+    }
     else {
       kelvin_rgb.b = temperature - 10;
       kelvin_rgb.b = 138.5177312231 * log(kelvin_rgb.b) - 305.0447927307;
