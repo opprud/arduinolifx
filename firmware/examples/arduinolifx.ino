@@ -32,11 +32,11 @@ Ported to Spark by @kennethlimcp, @mdma, @peekay123, @Hootie81 and @lightx on 09
 
  */
 // This #include statement was automatically added by the Spark IDE.
-#include "spark_wiring_random.h"  //needed temporarily until V3.3 is pushed to Spark Compiler
+#include "RGBMoodLifx/spark_wiring_random.h"  //needed temporarily until V3.3 is pushed to Spark Compiler
 #include "RGBMoodLifx/RGBMoodLifx.h"
-#include "color.h"
-#include "lifx.h"
-#include "myUDP.h"
+#include "RGBMoodLifx/color.h"
+#include "RGBMoodLifx/lifx.h"
+#include "RGBMoodLifx/myUDP.h"
 
 // Function declaration
 void printLifxPacket(LifxPacket &pkt);
