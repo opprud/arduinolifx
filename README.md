@@ -25,4 +25,4 @@ Made possible by the work of magicmonkey: https://github.com/magicmonkey/lifxjs/
 
 And also the RGBMood library by Harold Waterkeyn, which was modified slightly to support powering down the LED
 
-Ported over to Spark by @kennethlimcp, @pkourany and @m-mcgowan on 07 September 2014
+Ported over to Spark by @kennethlimcp, @pkourany, @m-mcgowan, @Hootie81 and @lightx on 09 September 2014

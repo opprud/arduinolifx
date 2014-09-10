@@ -28,14 +28,15 @@
 
  ####################################################################
 
- Ported to Spark by @kennethlimcp, @mdma and @peekay123 on 07 Sept 2014
+Ported to Spark by @kennethlimcp, @mdma, @peekay123, @Hootie81 and @lightx on 09 Sept 2014
 
  */
 // This #include statement was automatically added by the Spark IDE.
 #include "spark_wiring_random.h"  //needed temporarily until V3.3 is pushed to Spark Compiler
-#include "RGBMoodLifx.h"
+#include "RGBMoodLifx/RGBMoodLifx.h"
 #include "color.h"
 #include "lifx.h"
+#include "myUDP.h"
 
 // Function declaration
 void printLifxPacket(LifxPacket &pkt);
@@ -48,22 +49,22 @@ void setLight();
 
 
 // set to 1 to output debug messages (including packet dumps) to serial (38400 baud)
-const boolean DEBUG = 1;
+const boolean DEBUG = 0;
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
 byte mac[] = {
-  0xDE, 0xAD, 0xDE, 0xAD, 0xDE, 0xAD };
+  0xD0, 0x73, 0xD5, 0x00, 0xDE, 0x00 };
 byte site_mac[] = {
-  0xDE, 0xAD, 0xDE, 0xAD, 0xDE, 0xAD };
+  0xD0, 0x73, 0xD5, 0x00, 0xDE, 0x00 };
 
 // pins for the RGB LED:
-const int redPin = 3;
-const int greenPin = 5;
-const int bluePin = 6;
+const int redPin = A4;
+const int greenPin = A5;
+const int bluePin = A6;
 
 // label (name) for this bulb
-char bulbLabel[LifxBulbLabelLength] = "Arduino Bulb";
+char bulbLabel[LifxBulbLabelLength] = "Spark";
 
 // tags for this bulb
 char bulbTags[LifxBulbTagsLength] = {
@@ -79,19 +80,16 @@ long kel = 2000;
 long dim = 0;
 
 // Ethernet instances, for UDP broadcasting, and TCP server and client
-UDP Udp;
+myUDP Udp;
 TCPServer Server = TCPServer(LifxPort);
 TCPClient Client;
 
 RGBMoodLifx LIFXBulb(redPin, greenPin, bluePin);
 
-
-
-
 void setup() {
 
-  Serial.begin(9600);
-  while(!Serial.available()) Spark.process();
+  Serial.begin(115200);
+  //while(!Serial.available()) Spark.process();
   Serial.println(F("LIFX bulb emulator for Arduino starting up..."));
 
 

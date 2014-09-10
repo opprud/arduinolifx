@@ -59,18 +59,14 @@ const byte LIGHT_STATUS = 0x6b;
 // future data for EEPROM will start at 72...
 
 #define EEPROM_CONFIG "AL1" // 3 byte identifier for this sketch's EEPROM settings
-#define EEPROM_CONFIG_START 253 // store EEPROM_CONFIG at the end of EEPROM
+#define EEPROM_CONFIG_START 72 // store EEPROM_CONFIG at the end of EEPROM
 
 // helpers
 #define SPACE " "
 
 // Added in for Spark
-#ifndef lowByte
-#define lowByte(w) ((uint8_t)((w) & 0xFF))
-#endif
-#ifndef highByte
-#define highByte(w) ((uint8_t)((w) >> 8) && 0xFF)
-#endif
-#ifndef word
-#define word(b1,b2)  uint16_t(uint8_t(b1)<<8|uint8_t(b2))
-#endif
+typedef uint8_t byte;
+typedef uint16_t word;
+#define lowByte(w) ((uint8_t) ((w) & 0xff))
+#define highByte(w) ((uint8_t) ((w) >> 8))
+#define word(b1,b2)  (uint16_t(uint8_t(b1)<<8|uint8_t(b2)))
