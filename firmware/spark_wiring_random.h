@@ -4,12 +4,12 @@
  *
  * Created on 04 September 2014, 21:50
  */
-
+#if 0
 #ifndef SPARK_WIRING_RANDOM_H
 #define	SPARK_WIRING_RANDOM_H
 
 void randomSeed(unsigned int seed);
 int random(int min);
 int random(int min, int max);
-
+#endif
 #endif	/* SPARK_WIRING_RANDOM_H */
