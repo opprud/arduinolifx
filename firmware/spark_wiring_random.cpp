@@ -1,6 +1,6 @@
 #include "spark_wiring_random.h"
 #include <stdlib.h>
-
+#if 0
 int random(int max)
 {
   if (0 == max) {
@@ -21,3 +21,4 @@ void randomSeed(unsigned int seed)
 {
   srand(seed);
 }
+#endif
