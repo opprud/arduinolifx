@@ -181,9 +181,9 @@ void RGBMoodLifx::tick() {
   }
   //if (pins_[0] > 0) {
   if (pins_[0] >= 0) { // this is the modification for LIFX - allows 0 to be written for each pin to power off the LED
-    analogWrite(pins_[0], current_RGB_color_[0]);
-    analogWrite(pins_[1], current_RGB_color_[1]);
-    analogWrite(pins_[2], current_RGB_color_[2]);
+    analogWrite(pins_[0], 0xffff - current_RGB_color_[0]);
+    analogWrite(pins_[1], 0xffff - current_RGB_color_[1]);
+    analogWrite(pins_[2], 0xffff - current_RGB_color_[2]);
   }
 }
 
